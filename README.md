@@ -1,4 +1,4 @@
-**JAVA Springboot**
+**JAVA Spring Boot**
 
 A quick go through on the workings/architecture on setting up a Springboot project and how they work.
 
