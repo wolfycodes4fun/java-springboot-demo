@@ -19,7 +19,9 @@ public class PersonService {
     }
 
     public int addPerson(Person person) {
-        return personDao.insertPerson(person);
+        if (person.getId() == null)
+            return personDao.insertPerson(person);
+        return personDao.insertPerson(person.getId(), person);
     }
 
     public List<Person> getAllPeople() {
