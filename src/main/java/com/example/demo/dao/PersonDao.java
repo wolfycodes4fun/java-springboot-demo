@@ -15,4 +15,8 @@ public interface PersonDao {
     }
 
     List<Person> selectAllPeople();
+
+    int deletePersonById(UUID id);
+
+    int updatePersonById(UUID id, Person person);
 }
