@@ -1,0 +1,4 @@
+spring.application.name=demo
+spring.datasource.url=<Your DB URL>
+spring.datasource.username=<Your DB User>
+spring.datasource.password=<YourPassword>
