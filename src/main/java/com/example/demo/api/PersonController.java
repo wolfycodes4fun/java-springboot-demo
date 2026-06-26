@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Person;
+import com.example.demo.model.UpdatePersonDataPayload;
 import com.example.demo.service.PersonService;
 
 @RequestMapping("api/v1/person")
@@ -46,5 +48,12 @@ public class PersonController {
         if (personService.deletePersonById(id) == 1)
             return "Person with id " + id + " deleted successfully.";
         return "Person with id " + id + " was not found. Deletion failed.";
+    }
+
+    @PutMapping(path = "{id}")
+    public String updatePersonJobById(@PathVariable("id") UUID id, @RequestBody UpdatePersonDataPayload updatePersonDataPayload) {
+        if (personService.updatePersonJobById(id, updatePersonDataPayload.getNewJobTitle())) 
+            return "Updated job title of person with id " + id + " to: " + updatePersonDataPayload.getNewJobTitle();
+        return "Failed to update job title of person with id: " + id;
     }
 }

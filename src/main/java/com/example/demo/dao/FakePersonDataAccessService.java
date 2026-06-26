@@ -41,10 +41,12 @@ public class FakePersonDataAccessService implements PersonDao {
     }
 
     @Override
-    public int updatePersonById(UUID id, String newJobTitle, Person person) {
+    public boolean updatePersonById(UUID id, String newJobTitle) {
         Optional<Person> persona = selectPersonById(id);
-        persona.ifPresent(p -> p.setJobTitle(newJobTitle));
-        return 0;
+        if (persona.isPresent()) {
+            persona.get().setJobTitle(newJobTitle);
+            return true;
+        }
+        return false;
     }
-
 }
