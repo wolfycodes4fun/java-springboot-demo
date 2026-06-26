@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Person;
@@ -12,10 +15,11 @@ import com.example.demo.model.Person;
 public class FakePersonDataAccessService implements PersonDao {
 
     private static List<Person> DB = new ArrayList<>();
+    private static final Logger logger = LoggerFactory.getLogger(FakePersonDataAccessService.class);
 
     @Override
     public int insertPerson(UUID id, Person person) {
-        DB.add(new Person(id, person.getFirstName(), person.getLastName()));
+        DB.add(new Person(id, person.getFirstName(), person.getLastName(), person.getJobTitle()));
         return 1;
     }
 
@@ -26,7 +30,8 @@ public class FakePersonDataAccessService implements PersonDao {
 
     @Override
     public Optional<Person> selectPersonById(UUID id) {
-        return DB.stream().filter(person -> person.getId().equals(id)).findFirst();
+        Optional<Person> persona = DB.stream().filter(person -> person.getId().equals(id)).findFirst();
+        return persona;
     }
 
     @Override
@@ -36,8 +41,12 @@ public class FakePersonDataAccessService implements PersonDao {
     }
 
     @Override
-    public int updatePersonById(UUID id, Person person) {
-        return 0;
+    public boolean updatePersonById(UUID id, String newJobTitle) {
+        Optional<Person> persona = selectPersonById(id);
+        if (persona.isPresent()) {
+            persona.get().setJobTitle(newJobTitle);
+            return true;
+        }
+        return false;
     }
-
 }
