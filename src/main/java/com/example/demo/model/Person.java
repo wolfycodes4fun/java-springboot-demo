@@ -10,9 +10,9 @@ import jakarta.persistence.Id;
 public class Person {
 
     @Id
-    private final UUID id;
-    private final String firstName;
-    private final String lastName;
+    private UUID id;
+    private String firstName;
+    private String lastName;
     private String email;
     private String jobTitle;
 
@@ -27,6 +27,10 @@ public class Person {
         this.lastName = lastName;
         this.email = email;
         this.jobTitle = jobTitle;
+    }
+
+    public Person() {
+
     }
 
     public UUID getId() {

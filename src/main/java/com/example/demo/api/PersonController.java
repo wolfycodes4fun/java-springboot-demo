@@ -17,20 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Person;
 import com.example.demo.model.UpdatePersonDataPayload;
 import com.example.demo.service.PersonService;
+import com.example.demo.service.ProductionPersonService;
 
 @RequestMapping("api/v1/person")
 @RestController
 public class PersonController {
     private final PersonService personService;
+    private final ProductionPersonService productionPersonService;
 
     @Autowired
-    public PersonController(PersonService personService) {
+    public PersonController(PersonService personService, ProductionPersonService productionPersonService) {
         this.personService = personService;
+        this.productionPersonService = productionPersonService;
     }
 
     @PostMapping
     public void addPerson(@RequestBody Person person) {
         personService.addPerson(person);
+        productionPersonService.createNewPerson(person);
     }
 
     @GetMapping
