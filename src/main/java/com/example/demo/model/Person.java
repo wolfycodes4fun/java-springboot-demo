@@ -3,9 +3,21 @@ package com.example.demo.model;
 import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Person {
+    @Id
     private final UUID id;
+
+    @Notnull
+    @Size(min = 3, max = 150) 
     private final String firstName;
+
+    @Notnull
+    @Size(min = 3, max = 100)
     private final String lastName;
     private String jobTitle;
 

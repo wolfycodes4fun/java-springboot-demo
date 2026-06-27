@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Person;
@@ -15,7 +13,6 @@ import com.example.demo.model.Person;
 public class FakePersonDataAccessService implements PersonDao {
 
     private static List<Person> DB = new ArrayList<>();
-    private static final Logger logger = LoggerFactory.getLogger(FakePersonDataAccessService.class);
 
     @Override
     public int insertPerson(UUID id, Person person) {

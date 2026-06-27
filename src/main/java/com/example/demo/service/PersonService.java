@@ -16,7 +16,7 @@ public class PersonService {
     private final PersonDao personDao;
 
     @Autowired
-    public PersonService(@Qualifier("fakePersonDao") PersonDao personDao) {
+    public PersonService(@Qualifier("SQLMigration") PersonDao personDao) {
         this.personDao = personDao;
     }
 
